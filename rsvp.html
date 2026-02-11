@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RSVP</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; margin:0; padding:24px; background:#0b0f17; color:#e9eef7;}
+    .wrap{max-width:820px; margin:0 auto;}
+    h1{margin:0 0 8px;}
+    p{margin:0 0 18px; color:#c7d1e6;}
+    form{background:#121a2a; border:1px solid #23304a; border-radius:14px; padding:18px;}
+    label{display:block; font-weight:600; margin:14px 0 6px;}
+    input[type="text"], input[type="number"], select{
+      width:100%; padding:10px 12px; border-radius:10px;
+      border:1px solid #2b3a5a; background:#0c1220; color:#e9eef7;
+      outline:none;
+    }
+    fieldset{border:1px solid #23304a; border-radius:12px; padding:14px; margin:14px 0 0;}
+    legend{padding:0 8px; color:#c7d1e6;}
+    .row{display:grid; grid-template-columns: 1fr; gap:12px;}
+    @media (min-width:720px){ .row{grid-template-columns: 1fr 1fr;} }
+    .muted{font-size:0.95rem; color:#c7d1e6;}
+    .actions{display:flex; gap:12px; margin-top:18px; flex-wrap:wrap;}
+    button, a.btn{
+      display:inline-block; padding:11px 14px; border-radius:12px;
+      border:1px solid #2b3a5a; background:#1a2640; color:#e9eef7;
+      text-decoration:none; cursor:pointer; font-weight:700;
+    }
+    button:hover, a.btn:hover{background:#223354;}
+    .hidden{display:none;}
+    .person-card{margin-top:12px; padding:12px; border:1px solid #23304a; border-radius:12px; background:#0c1220;}
+    .person-title{font-weight:800; margin:0 0 10px;}
+    .note{margin-top:10px; font-size:0.9rem; color:#b9c6df;}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>RSVP</h1>
+    <p>Please complete the form below. If you’re attending, you’ll be able to choose food for each person in your group.</p>
+
+    <!--
+      Email sending is handled by FormSubmit (static sites).
+      First submission may require confirming/activating the recipient email.
+    -->
+    <form id="rsvpForm" action="https://formsubmit.co/macphersonpope@gmail.com" method="POST">
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="New RSVP submission" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="thanks.html" />
+
+      <label for="name">Your name</label>
+      <input id="name" name="Name" type="text" autocomplete="name" required />
+
+      <label for="attending">Are you attending?</label>
+      <select id="attending" name="Attending" required>
+        <option value="" selected disabled>Please choose…</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <div id="attendingFields" class="hidden">
+        <label for="groupSize">How many people are in your group?</label>
+        <input id="groupSize" name="Group size" type="number" min="1" max="20" value="1" />
+
+        <div class="note">Food choices are required for each person.</div>
+
+        <div id="peopleContainer"></div>
+      </div>
+
+      <div class="actions">
+        <button type="submit">Send RSVP</button>
+        <a class="btn" href="index.html">Back to home</a>
+      </div>
+
+      <p class="muted" style="margin-top:14px;">
+        If you select “No”, the form will send just your name + attending status.
+      </p>
+    </form>
+  </div>
+
+  <script>
+    const attendingEl = document.getElementById('attending');
+    const attendingFields = document.getElementById('attendingFields');
+    const groupSizeEl = document.getElementById('groupSize');
+    const peopleContainer = document.getElementById('peopleContainer');
+
+    const mains = [
+      "Atlantic Salmon",
+      "Lancashire Cheese & Onion Pie"
+    ];
+
+    const desserts = [
+      "Sicilian Lemon Cheesecake (V)",
+      "Double Chocolate Brownie (V)"
+    ];
+
+    function personBlock(i){
+      const wrapper = document.createElement('div');
+      wrapper.className = 'person-card';
+
+      const title = document.createElement('div');
+      title.className = 'person-title';
+      title.textContent = `Person ${i}`;
+      wrapper.appendChild(title);
+
+      const row = document.createElement('div');
+      row.className = 'row';
+
+      // Main select
+      const mainWrap = document.createElement('div');
+      const mainLabel = document.createElement('label');
+      mainLabel.textContent = 'Main';
+      mainLabel.setAttribute('for', `main_${i}`);
+      const mainSel = document.createElement('select');
+      mainSel.id = `main_${i}`;
+      mainSel.name = `Person ${i} - Main`;
+      mainSel.required = true;
+
+      const mainOpt0 = document.createElement('option');
+      mainOpt0.value = '';
+      mainOpt0.textContent = 'Choose a main…';
+      mainOpt0.disabled = true;
+      mainOpt0.selected = true;
+      mainSel.appendChild(mainOpt0);
+
+      mains.forEach(m => {
+        const o = document.createElement('option');
+        o.value = m;
+        o.textContent = m;
+        mainSel.appendChild(o);
+      });
+
+      mainWrap.appendChild(mainLabel);
+      mainWrap.appendChild(mainSel);
+
+      // Dessert select
+      const desWrap = document.createElement('div');
+      const desLabel = document.createElement('label');
+      desLabel.textContent = 'Dessert';
+      desLabel.setAttribute('for', `dessert_${i}`);
+      const desSel = document.createElement('select');
+      desSel.id = `dessert_${i}`;
+      desSel.name = `Person ${i} - Dessert`;
+      desSel.required = true;
+
+      const desOpt0 = document.createElement('option');
+      desOpt0.value = '';
+      desOpt0.textContent = 'Choose a dessert…';
+      desOpt0.disabled = true;
+      desOpt0.selected = true;
+      desSel.appendChild(desOpt0);
+
+      desserts.forEach(d => {
+        const o = document.createElement('option');
+        o.value = d;
+        o.textContent = d;
+        desSel.appendChild(o);
+      });
+
+      desWrap.appendChild(desLabel);
+      desWrap.appendChild(desSel);
+
+      row.appendChild(mainWrap);
+      row.appendChild(desWrap);
+
+      wrapper.appendChild(row);
+
+      return wrapper;
+    }
+
+    function renderPeople(count){
+      peopleContainer.innerHTML = '';
+      const n = Math.max(1, Math.min(20, Number(count) || 1));
+      for(let i=1; i<=n; i++){
+        peopleContainer.appendChild(personBlock(i));
+      }
+    }
+
+    attendingEl.addEventListener('change', () => {
+      const yes = attendingEl.value === 'Yes';
+      attendingFields.classList.toggle('hidden', !yes);
+      if(yes){
+        if(!groupSizeEl.value) groupSizeEl.value = 1;
+        renderPeople(groupSizeEl.value);
+      } else {
+        peopleContainer.innerHTML = '';
+      }
+    });
+
+    groupSizeEl.addEventListener('input', () => {
+      renderPeople(groupSizeEl.value);
+    });
+  </script>
+</body>
+</html>
