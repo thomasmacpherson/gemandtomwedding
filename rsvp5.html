@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RSVP</title>
+
+  <!-- Your existing stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="page">
+
+  <!-- Simple Top Nav Title -->
+  <nav class="fh5co-nav" role="navigation">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h1 id="fh5co-logo">RSVP</h1>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- White Section -->
+  <div class="fh5co-section">
+    <div class="container">
+
+      <div class="row row-pb-md">
+        <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+          <h2>Let us know if you're attending</h2>
+          <p>Please select your menu choices and include any allergies or dietary requirements.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+          <form action="https://formsubmit.co/macphersonpope@gmail.com" method="POST" id="rsvpForm">
+
+            <input type="hidden" name="_subject" value="New RSVP submission">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="thanks.html">
+
+            <div class="form-group">
+              <input type="text" class="form-control" name="Primary Name" id="primaryName" placeholder="Your Name" required>
+            </div>
+
+            <div class="form-group">
+              <select class="form-control" name="Attending" id="attending" required>
+                <option value="" disabled selected>Are you attending?</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="groupWrap" style="display:none;">
+              <input type="number" class="form-control" name="Group Size" id="groupSize" min="1" max="20" value="1" placeholder="Number in your group">
+            </div>
+
+            <div id="peopleContainer"></div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg">Send RSVP</button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const attending = document.getElementById('attending');
+  const groupWrap = document.getElementById('groupWrap');
+  const groupSize = document.getElementById('groupSize');
+  const peopleContainer = document.getElementById('peopleContainer');
+  const primaryName = document.getElementById('primaryName');
+
+  function createPerson(i) {
+    const wrapper = document.createElement('div');
+    wrapper.className = "form-group";
+
+    let html = "<hr>";
+
+    if (i > 1) {
+      html += "<input type='text' class='form-control' name='Person " + i + " Name' placeholder='Person " + i + " Name' required>";
+    } else {
+      html += "<input type='hidden' name='Person 1 Name' value='" + primaryName.value + "'>";
+    }
+
+    html += "<input type='text' class='form-control' name='Person " + i + " Dietary' placeholder='Allergies / Dietary Requirements'>";
+    html += "<select class='form-control' name='Person " + i + " Main' required>" +
+            "<option value='' disabled selected>Main Course</option>" +
+            "<option>Atlantic Salmon</option>" +
+            "<option>Lancashire Cheese & Onion Pie</option>" +
+            "</select>";
+
+    html += "<select class='form-control' name='Person " + i + " Dessert' required>" +
+            "<option value='' disabled selected>Dessert</option>" +
+            "<option>Sicilian Lemon Cheesecake (V)</option>" +
+            "<option>Double Chocolate Brownie (V)</option>" +
+            "</select>";
+
+    wrapper.innerHTML = html;
+    return wrapper;
+  }
+
+  function renderPeople() {
+    peopleContainer.innerHTML = "";
+    const count = parseInt(groupSize.value) || 1;
+
+    for (let i = 1; i <= count; i++) {
+      peopleContainer.appendChild(createPerson(i));
+    }
+  }
+
+  attending.addEventListener("change", function() {
+    if (this.value === "Yes") {
+      groupWrap.style.display = "block";
+      renderPeople();
+    } else {
+      groupWrap.style.display = "none";
+      peopleContainer.innerHTML = "";
+    }
+  });
+
+  groupSize.addEventListener("input", renderPeople);
+  primaryName.addEventListener("input", renderPeople);
+</script>
+
+</body>
+</html>

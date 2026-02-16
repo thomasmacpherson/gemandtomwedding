@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Let's Celebrate</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b0f17;
+      color: #f5f6fa;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 1100px;      div.style.marginTop = "12px";
+
+      margin: 0 auto;
+      padding: 28px 18px 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-block;
+      font-weight: 700;
+      letter-spacing: .02em;
+      font-size: 0.9rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: #e8ecf9;
+      white-space: nowrap;
+    }
+    .hero {
+      border: 1px solid rgba(255,255,255,.12);
+      background: radial-gradient(1200px 500px at 20% 10%, rgba(120, 141, 255, .28), transparent 55%),
+                  radial-gradient(900px 420px at 85% 30%, rgba(255, 176, 99, .22), transparent 55%),
+                  rgba(255,255,255,.03);
+      border-radius: 24px;
+      padding: 28px 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+    @media (min-width: 860px) {
+      .grid {
+        grid-template-columns: 1.2fr .8fr;
+        align-items: start;
+      }
+    }
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 6px 0 10px;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      font-size: 1.05rem;
+      color: #d7dcf0;
+      max-width: 58ch;
+      margin: 0 0 16px;
+    }
+    .details {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .detail {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: rgba(0,0,0,.18);
+    }
+    .detail b { display: block; margin-bottom: 2px; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    a.btn, button.btn {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: #f5f6fa;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease;
+    }
+    a.btn:hover, button.btn:hover {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(255,255,255,.28);
+      transform: translateY(-1px);
+    }
+    a.btn.primary {
+      background: linear-gradient(135deg, rgba(120,141,255,.9), rgba(255,176,99,.72));
+      border-color: rgba(255,255,255,.18);
+      color: #0b0f17;
+    }
+    .side {
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      padding: 18px 16px;
+      background: rgba(255,255,255,.03);
+    }
+    .side h2 { margin: 0 0 10px; font-size: 1.2rem; }
+    .side p { margin: 0 0 10px; color: #d7dcf0; }
+    .fine {
+      font-size: .95rem;
+      color: #c9d0ea;
+      opacity: .95;
+    }
+    footer {
+      margin-top: 18px;
+      color: rgba(245,246,250,.72);
+      font-size: .95rem;
+    }
+    .sep {
+      height: 1px;
+      background: rgba(255,255,255,.10);
+      margin: 14px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">Let’s Celebrate</div>
+      <div class="badge">RSVP requested</div>
+    </header>
+
+    <div class="hero">
+      <div class="grid">
+        <div>
+          <h1>You're invited</h1>
+          <p class="sub">
+            Please join us for a celebration. Use the RSVP button below to let us know if you can make it and choose your food options.
+          </p>
+
+          <div class="details">
+            <div class="detail">
+              <b>Date</b>
+              <div>Saturday 17 May 2025</div>
+            </div>
+            <div class="detail">
+              <b>Time</b>
+              <div>2:00pm</div>
+            </div>
+            <div class="detail">
+              <b>Location</b>
+              <div>Wyrsedale Park, Lancashire</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <!-- UPDATED: link to the new RSVP page -->
+            <a class="btn primary" href="rsvp.html">RSVP / Food choices</a>
+            <a class="btn" href="#info">More info</a>
+          </div>
+
+          <footer id="info">
+            <div class="sep"></div>
+            <div class="fine">
+              If you have any questions, just reply to the invite message you received.
+            </div>
+          </footer>
+        </div>
+
+        <aside class="side">
+          <h2>Food options</h2>
+          <p><b>Main:</b> Atlantic Salmon <i>or</i> Lancashire Cheese &amp; Onion Pie</p>
+          <p><b>Dessert:</b> Sicilian Lemon Cheesecake (V) <i>or</i> Double Chocolate Brownie (V)</p>
+          <div class="sep"></div>
+          <p class="fine">You’ll pick options for each person when you RSVP.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RSVP</title>
+
+  <!-- SAME CSS AS ORIGINAL INDEX -->
+  <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+
+    </header>
+
+    <div class="hero">
+      <h1>Répondez S'il Vous Plaît</h1>
+      <p class="sub">
+        Please let us know if you’re attending.
+      </p>
+
+      <form action="https://formsubmit.co/macphersonpope@gmail.com" method="POST" id="rsvpForm">
+        <input type="hidden" name="_subject" value="New RSVP submission" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="thanks.html" />
+
+        <div class="details">
+          <div class="detail">
+            <h2>Your name</h2>
+            <input type="text" name="Primary Name" id="primaryName" required style="width:100%; padding:8px;" />
+          </div>
+
+          <div class="detail">
+            <b>Are you attending?</b>
+            <select name="Attending" id="attending" required style="width:100%; padding:8px;">
+              <option value="" disabled selected>Please choose…</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div class="detail" id="groupWrap" style="display:none;">
+            <b>How many people are in your group?</b>
+            <input type="number" name="Group Size" id="groupSize" min="1" max="20" value="1" style="width:100%; padding:8px;" />
+          </div>
+
+          <div class="detail" id="peopleWrap" style="display:none;">
+            <b>Food choices & dietary requirements</b>
+            <div id="peopleContainer"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="submit">Send RSVP</button>
+          <a class="btn" href="index.html">Back to home</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const attending = document.getElementById('attending');
+    const groupWrap = document.getElementById('groupWrap');
+    const peopleWrap = document.getElementById('peopleWrap');
+    const groupSize = document.getElementById('groupSize');
+    const peopleContainer = document.getElementById('peopleContainer');
+    const primaryName = document.getElementById('primaryName');
+
+    const mains = ["Atlantic Salmon", "Lancashire Cheese & Onion Pie"];
+    const desserts = ["Sicilian Lemon Cheesecake (V)", "Double Chocolate Brownie (V)"];
+
+    function createPerson(i) {
+      const div = document.createElement('div');
+      div.style.marginTop = "12px";
+
+      div.innerHTML += "<hr>";
+
+      if (i > 1) {
+        div.innerHTML += "<p><b>Person " + i + " Name</b></p>";
+        div.innerHTML += "<input type='text' name='Person " + i + " Name' required style='width:100%; padding:8px;' />";
+      } else {
+        div.innerHTML += "<input type='hidden' name='Person 1 Name' value='" + primaryName.value + "' />";
+        div.innerHTML += "<p><b>Person 1 (You)</b></p>";
+      }
+
+      div.innerHTML += "<p><b>Allergies / Dietary Requirements</b></p>";
+      div.innerHTML += "<input type='text' name='Person " + i + " Dietary' style='width:100%; padding:8px;' />";
+
+      div.innerHTML += "<p><b>Main</b></p>";
+      div.innerHTML += "<select name='Person " + i + " Main' required style='width:100%; padding:8px;'>" +
+                       "<option value='' disabled selected>Choose…</option>" +
+                       "<option>Atlantic Salmon</option>" +
+                       "<option>Lancashire Cheese & Onion Pie</option>" +
+                       "</select>";
+
+      div.innerHTML += "<p><b>Dessert</b></p>";
+      div.innerHTML += "<select name='Person " + i + " Dessert' required style='width:100%; padding:8px;'>" +
+                       "<option value='' disabled selected>Choose…</option>" +
+                       "<option>Sicilian Lemon Cheesecake (V)</option>" +
+                       "<option>Double Chocolate Brownie (V)</option>" +
+                       "</select>";
+
+      return div;
+    }
+
+    function renderPeople() {
+      peopleContainer.innerHTML = "";
+      const count = parseInt(groupSize.value) || 1;
+      for (let i = 1; i <= count; i++) {
+        peopleContainer.appendChild(createPerson(i));
+      }
+    }
+
+    attending.addEventListener("change", function() {
+      if (this.value === "Yes") {
+        groupWrap.style.display = "block";
+        peopleWrap.style.display = "block";
+        renderPeople();
+      } else {
+        groupWrap.style.display = "none";
+        peopleWrap.style.display = "none";
+        peopleContainer.innerHTML = "";
+      }
+    });
+
+    groupSize.addEventListener("input", renderPeople);
+    primaryName.addEventListener("input", renderPeople);
+  </script>
+</body>
+</html>

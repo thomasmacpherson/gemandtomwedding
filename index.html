@@ -1,194 +1,478 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Let's Celebrate</title>
-  <style>
-    body {
-      margin: 0;
-      background: #0b0f17;
-      color: #f5f6fa;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.45;
-    }
-    .wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 28px 18px 50px;
-      position: relative;
-      overflow: hidden;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .badge {
-      display: inline-block;
-      font-weight: 700;
-      letter-spacing: .02em;
-      font-size: 0.9rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: #e8ecf9;
-      white-space: nowrap;
-    }
-    .hero {
-      border: 1px solid rgba(255,255,255,.12);
-      background: radial-gradient(1200px 500px at 20% 10%, rgba(120, 141, 255, .28), transparent 55%),
-                  radial-gradient(900px 420px at 85% 30%, rgba(255, 176, 99, .22), transparent 55%),
-                  rgba(255,255,255,.03);
-      border-radius: 24px;
-      padding: 28px 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-    .grid {
-      display: grid;
-      gap: 18px;
-    }
-    @media (min-width: 860px) {
-      .grid {
-        grid-template-columns: 1.2fr .8fr;
-        align-items: start;
-      }
-    }
-    h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      margin: 6px 0 10px;
-      letter-spacing: -0.02em;
-    }
-    .sub {
-      font-size: 1.05rem;
-      color: #d7dcf0;
-      max-width: 58ch;
-      margin: 0 0 16px;
-    }
-    .details {
-      display: grid;
-      gap: 10px;
-      margin-top: 14px;
-    }
-    .detail {
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 16px;
-      padding: 12px 14px;
-      background: rgba(0,0,0,.18);
-    }
-    .detail b { display: block; margin-bottom: 2px; }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    a.btn, button.btn {
-      appearance: none;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      color: #f5f6fa;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-weight: 800;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: transform .08s ease, background .18s ease, border-color .18s ease;
-    }
-    a.btn:hover, button.btn:hover {
-      background: rgba(255,255,255,.1);
-      border-color: rgba(255,255,255,.28);
-      transform: translateY(-1px);
-    }
-    a.btn.primary {
-      background: linear-gradient(135deg, rgba(120,141,255,.9), rgba(255,176,99,.72));
-      border-color: rgba(255,255,255,.18);
-      color: #0b0f17;
-    }
-    .side {
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 20px;
-      padding: 18px 16px;
-      background: rgba(255,255,255,.03);
-    }
-    .side h2 { margin: 0 0 10px; font-size: 1.2rem; }
-    .side p { margin: 0 0 10px; color: #d7dcf0; }
-    .fine {
-      font-size: .95rem;
-      color: #c9d0ea;
-      opacity: .95;
-    }
-    footer {
-      margin-top: 18px;
-      color: rgba(245,246,250,.72);
-      font-size: .95rem;
-    }
-    .sep {
-      height: 1px;
-      background: rgba(255,255,255,.10);
-      margin: 14px 0;
-    }
-  </style>
-</head>
-<body>
-  <div class="wrap">
-    <header>
-      <div class="badge">Let’s Celebrate</div>
-      <div class="badge">RSVP requested</div>
-    </header>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Gemma ❤️ Thomas - 1.5.2026</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="We are getting Married!" />
+	<meta name="keywords" content="gemma,tom,wedding,website,rsvp" />
+	<meta name="author" content="Gemma & Tom" />
 
-    <div class="hero">
-      <div class="grid">
-        <div>
-          <h1>You're invited</h1>
-          <p class="sub">
-            Please join us for a celebration. Use the RSVP button below to let us know if you can make it and choose your food options.
-          </p>
+  	<!-- Facebook and Twitter integration -->
+	<!-- <meta property="og:image" content="images/og.jpg"/> -->
+	<meta property="og:site_name" content="Gemma ❤️ Thomas - 1.5.2026">
+    <meta property="og:title" content="Gemma ❤️ Thomas - 1.5.2026">
+    <meta property="og:description" content="We are getting Married!">
+	<!-- Size of image. Any size up to 300. Anything above 300px will not work in WhatsApp -->
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <!-- Website to visit when clicked in fb or WhatsApp-->
+    <meta property="og:url" content="https://gemandtom.wedding">
+	<meta property="og:type" content="website"/>
+    <meta property="og:image:type" content="image/jpeg">
 
-          <div class="details">
-            <div class="detail">
-              <b>Date</b>
-              <div>Saturday 17 May 2025</div>
-            </div>
-            <div class="detail">
-              <b>Time</b>
-              <div>6:30pm</div>
-            </div>
-            <div class="detail">
-              <b>Location</b>
-              <div>Stirk House, Gisburn</div>
-            </div>
+
+	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
+	<link rel="stylesheet" href="fonts/Admire+Camelia.ttf" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia+Sans+Condensed" rel="stylesheet">
+	
+	<!-- clock   -->
+	<link rel="stylesheet" href="css/responsive-clock.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+		<style>
+            .my_text
+            {
+                font-family:    Arial, Helvetica, sans-serif;
+                font-size:      40px;
+                font-weight:    bold;
+            }
+        </style>
+
+	</head>
+	<body>
+		
+	<div class="fh5co-loader"></div>
+	
+	<div id="page">
+	<nav class="fh5co-nav" role="navigation">
+		<div class="container">
+			<div class="row">
+	
+				<div class="col-xs-10 text-right menu-1">
+					<ul>
+						<li class="active"><a href="index.html">Home</a></li>
+						<li class="active"><a href="#fh5co-event">Order of service</a></li>
+						<li class="active"><a href="#fh5co-travel">Travel</a></li>
+						<li class="active"><a href="#fh5co-accomodation">Accomodation</a></li>
+						<li class="active"><a href="#fh5co-gallery">Gallery</a></li>
+						<li class="active"><a href="#rsvp">RSVP</a></li>
+
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</nav>
+
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/bg.jpg);" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<h1>Gemma &amp; Thomas</h1>
+							<br>
+							<h2>1st May 2026</h2>
+							<h2>see I told you it wasn't a good expression and now they've cut my head out and put me on a turtle</h2>
+							<div class="flipTimebox">
+								<div class="clock clock-fix"></div>
+							  </div>
+							<p><a href="#rsvp" class="btn btn-default btn-sm">Répondez S'il Vous Plaît</a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+
+	<div id="fh5co-event" class="fh5co-bg">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>Order of service</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="display-t">
+					<div class="display-tc">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="col-md-6 col-sm-6 text-center">
+								<div class="event-wrap animate-box">
+									<h3>Wedding</h3>
+									<div class="event-col">
+										<i class="icon-calendar"></i>
+										<span>1st May 2026</span>
+									</div>
+									<div class="event-col">
+
+										<i class="icon-clock"></i>
+										<span>11:30 AM</span>
+									</div>
+									<p>At <b>Location 1</b></p>
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.673315773661!2d75.71257847590881!3d11.927808088299846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba5cd2b69442ebf%3A0x41b4e77a403a15b4!2sDe%20Paul%20Church%2C%20Edathotty!5e0!3m2!1sen!2sin!4v1696094112600!5m2!1sen!2sin" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 text-center">
+								<div class="event-wrap animate-box">
+									<h3>Wedding</h3> 
+									<div class="event-col">
+										<i class="icon-calendar"></i>
+										<span>1st May 2026</span>
+									</div>
+									<div class="event-col">
+
+										<i class="icon-clock"></i>
+										<span>2:00 PM</span>
+									</div>
+									<p>At <b>Location 2</b></p>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.690238117892!2d76.24293817588756!3d10.124421489987455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0810402ea732f5%3A0x7e23209bf83c2a9b!2sSt.Antony&#39;s%20Roman%20Catholic%20Church!5e0!3m2!1sen!2sin!4v1696094216568!5m2!1sen!2sin" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="fh5co-travel" class="fh5co-section-gray">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>Travel</h2>
+					<p>The venue <a href="https://maps.app.goo.gl/Gvd1sNkCZ6n4QVbB7" target="_blank">Wyresdale Park</a> is located in Scorton, a small village in the Wyre district of Lancashire.</p>
+
+					<h3>Driving</h3>
+					<p>Take the exit at junction 33 of the M6. There is ample onsite parking from 1pm 1st May. Your vehicle must vacate the premises by 11:30am on 2nd May.</p>
+					<br><br>
+
+
+					<h3>Taxis</h3>
+					<p>Taxis all taxis must be pre-booked before the day of the wedding as it is a rural venue. Some suggestions below:</p>
+					<ul style="list-style-type:none;">
+						<li><b>A2B Cabs:</b> 01995 915091/07495720830 </li>
+						<li><b>Garstang Local Cabs:</b> 01995 471020 848</li>
+						<li><b>Taxis Lancaster:</b> 01524 848848 </li>
+					</ul>
+					<br><br>
+
+					<h3>Trains</h3>
+					<p><a href="https://maps.app.goo.gl/w6hzKuzEctgM2t8J8" target="_blank">Lancaster</a>
+						<a href="https://maps.app.goo.gl/akHqeGSKVte83S8E8" target="_blank">Preston</a>
+
+						
+					</p>					
+
+
+
+
+
+
+					<h3></h3>
+					<p> </p>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="fh5co-accomodation" class="fh5co-bg">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>Accomodation</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="display-t">
+					<div class="display-tc">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="col-md-6 col-sm-6 text-center">
+								<div class="event-wrap animate-box">
+									<h3>The coach house</h3>
+									<div class="event-col">
+										<i class="icon-calendar"></i>
+										<span>1st May 2026</span>
+									</div>
+									<div class="event-col">
+
+										<i class="icon-clock"></i>
+										<span>11:30 AM</span>
+									</div>
+									<p>At <b>Location 1</b></p>
+									<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3903.673315773661!2d75.71257847590881!3d11.927808088299846!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba5cd2b69442ebf%3A0x41b4e77a403a15b4!2sDe%20Paul%20Church%2C%20Edathotty!5e0!3m2!1sen!2sin!4v1696094112600!5m2!1sen!2sin" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6 text-center">
+								<div class="event-wrap animate-box">
+									<h3>Wedding</h3> 
+									<div class="event-col">
+										<i class="icon-calendar"></i>
+										<span>1st May 2026</span>
+									</div>
+									<div class="event-col">
+
+										<i class="icon-clock"></i>
+										<span>2:00 PM</span>
+									</div>
+									<p>At <b>Location 2</b></p>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.690238117892!2d76.24293817588756!3d10.124421489987455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b0810402ea732f5%3A0x7e23209bf83c2a9b!2sSt.Antony&#39;s%20Roman%20Catholic%20Church!5e0!3m2!1sen!2sin!4v1696094216568!5m2!1sen!2sin" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="fh5co-gallery" class="fh5co-section-gray">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+					<h2>Gallery</h2>
+				</div>
+			</div>
+			<div class="row row-bottom-padded-md">
+				<div class="col-md-12">
+					<ul id="fh5co-gallery-list">
+						
+
+					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(images/gt2.jpg); "> 
+						<a href="images/gt2.jpg">
+							<div class="case-studies-summary">
+							</div>
+						</a>
+					</li>
+					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(images/gt5.jpg); "> 
+						<a href="images/gt5.jpg">
+							<div class="case-studies-summary">
+							</div>
+						</a>
+					</li>
+
+					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(images/gt7.jpg); "> 
+						<a href="images/gt7.jpg">
+							<div class="case-studies-summary">
+							</div>
+						</a>
+					</li>
+					<li class="one-third animate-box" data-animate-effect="fadeIn" style="background-image: url(images/gt8.jpg); "> 
+						<a href="images/gt8.jpg">
+							<div class="case-studies-summary">
+							</div>
+						</a>
+					</li>
+
+
+																																			
+					</ul>		
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	</div>
+
+		<div id="rsvp" class="fh5co-bg">
+	   			<div class="container">
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1 text-center fh5co-heading animate-box">
+					<h2>Répondez S'il Vous Plaît</h2>
+				</div>
+			</div>
+			<div class="row row-bottom-padded-md">
+				<div class="col-md-12">
+      <h3>
+        Please let us know if you’re attending by 22th February.
+      </h3>
+
+      <form action="https://formsubmit.co/macphersonpope@gmail.com" method="POST" id="rsvpForm">
+        <input type="hidden" name="_subject" value="New RSVP submission" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="thanks.html" />
+
+        <div >
+          <div >
+
+            <span>Your name</span>
+            <input type="text" name="Primary Name" id="primaryName" required style="width:100%; padding:8px;" />
+          </div>
+          <br>
+
+          <div class="event-wrap">
+            <span>Are you attending?</span>
+            <select name="Attending" id="attending" required style="width:100%; padding:8px;">
+              <option value="" disabled selected>Please choose…</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
           </div>
 
-          <div class="actions">
-            <!-- UPDATED: link to the new RSVP page -->
-            <a class="btn primary" href="rsvp.html">RSVP / Food choices</a>
-            <a class="btn" href="#info">More info</a>
+          <div class="event-wrap"  id="groupWrap" >
+            <span>How many people are in your group?</span>
+            <input type="number" name="Group Size" id="groupSize" min="1" max="10" value="1" style="width:100%; padding:8px;" />
           </div>
 
-          <footer id="info">
-            <div class="sep"></div>
-            <div class="fine">
-              If you have any questions, just reply to the invite message you received.
-            </div>
-          </footer>
+          <div class="event-wrap"  id="peopleWrap" >
+            <span>Food choices & dietary requirements</span>
+            <div id="peopleContainer"></div>
+          </div>
         </div>
 
-        <aside class="side">
-          <h2>Food options</h2>
-          <p><b>Main:</b> Atlantic Salmon <i>or</i> Lancashire Cheese &amp; Onion Pie</p>
-          <p><b>Dessert:</b> Sicilian Lemon Cheesecake (V) <i>or</i> Double Chocolate Brownie (V)</p>
-          <div class="sep"></div>
-          <p class="fine">You’ll pick options for each person when you RSVP.</p>
-        </aside>
-      </div>
+        <div class="actions">
+        	<br>
+          <button class="btn" type="submit">Send RSVP</button>
+          <br><br>
+        </div>
+      </form>
     </div>
+  </div>    </div>
   </div>
-</body>
+</div>
+  
+
+  <script>
+    const attending = document.getElementById('attending');
+    const groupWrap = document.getElementById('groupWrap');
+    const peopleWrap = document.getElementById('peopleWrap');
+    const groupSize = document.getElementById('groupSize');
+    const peopleContainer = document.getElementById('peopleContainer');
+    const primaryName = document.getElementById('primaryName');
+
+    const mains = ["Atlantic Salmon", "Lancashire Cheese & Onion Pie"];
+    const desserts = ["Sicilian Lemon Cheesecake (V)", "Double Chocolate Brownie (V)"];
+
+    function createPerson(i) {
+      const div = document.createElement('div');
+      div.style.marginTop = "12px";
+
+      div.innerHTML += "<hr>";
+
+      if (i > 1) {
+        div.innerHTML += "<h3>Guest " + i + "</h3>"
+        div.innerHTML += "<span>Name</span>";
+        div.innerHTML += "<input type='text' name='Guest " + i + " Name' required style='width:100%; padding:8px;' /><br><br>";
+      } else {
+        div.innerHTML += "<input type='hidden' name='Person 1 Name' value='" + primaryName.value + "' />";
+        div.innerHTML += "<h3>Guest 1 (You)</h3>";
+      }
+
+      div.innerHTML += "<span>Allergies / Dietary Requirements</span>";
+      div.innerHTML += "<input type='text' name='Guest " + i + " Dietary' style='width:100%; padding:8px;' /><br><br>";
+
+      div.innerHTML += "<span>Main</span>";
+      div.innerHTML += "<select name='Guest " + i + " Main' required style='width:100%; padding:8px;'>" +
+                       "<option value='' disabled selected>Choose…</option>" +
+                       "<option>Atlantic Salmon</option>" +
+                       "<option>Lancashire Cheese & Onion Pie</option>" +
+                       "</select><br><br>";
+
+      div.innerHTML += "<span>Dessert</span>";
+      div.innerHTML += "<select name='Guest " + i + " Dessert' required style='width:100%; padding:8px;'>" +
+                       "<option value='' disabled selected>Choose…</option>" +
+                       "<option>Sicilian Lemon Cheesecake (V)</option>" +
+                       "<option>Double Chocolate Brownie (V)</option>" +
+                       "</select><br>";
+
+      return div;
+    }
+
+    function renderPeople() {
+      peopleContainer.innerHTML = "";
+      const count = parseInt(groupSize.value) || 1;
+      for (let i = 1; i <= count; i++) {
+        peopleContainer.appendChild(createPerson(i));
+      }
+    }
+
+    attending.addEventListener("change", function() {
+      if (this.value === "Yes") {
+        groupWrap.style.display = "block";
+        peopleWrap.style.display = "block";
+        renderPeople();
+      } else {
+        groupWrap.style.display = "none";
+        peopleWrap.style.display = "none";
+        peopleContainer.innerHTML = "";
+      }
+    });
+
+    groupSize.addEventListener("input", renderPeople);
+    primaryName.addEventListener("input", renderPeople);
+  </script>
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+    <!-- clock -->
+	<script src="js/clock.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	<script src='https://momentjs.com/downloads/moment.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.14/moment-timezone-with-data-2012-2022.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js'></script>
+	<!-- Stellar -->
+	<script src="js/jquery.stellar.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+
+	<!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script> -->
+	<script src="js/simplyCountdown.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
 </html>

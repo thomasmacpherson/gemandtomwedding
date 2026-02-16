@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RSVP</title>
+
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="badge">Let’s Celebrate</div>
+      <div class="badge">RSVP</div>
+    </header>
+
+    <div class="hero">
+      <div class="grid">
+        <div>
+          <h1>RSVP</h1>
+          <p class="sub">
+            Let us know if you’re attending. If yes, choose food for each person and add any allergies or dietary requirements.
+          </p>
+
+          <form id="rsvpForm" action="https://formsubmit.co/macphersonpope@gmail.com" method="POST">
+            <!-- FormSubmit settings -->
+            <input type="hidden" name="_subject" value="New RSVP submission" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="thanks.html" />
+
+            <div class="details">
+              <div class="detail">
+                <b>Your name</b>
+                <input
+                  id="primaryName"
+                  name="Primary Name"
+                  type="text"
+                  required
+                  autocomplete="name"
+                 
+                />
+              </div>
+
+              <div class="detail">
+                <b>Are you attending?</b>
+                <select
+                  id="attending"
+                  name="Attending"
+                  required
+                 
+                >
+                  <option value="" selected disabled>Please choose…</option>
+                  <option value="Yes">Yes</option>
+                  <option value="No">No</option>
+                </select>
+                <div class="fine" style="margin-top:10px;">
+                  If you select “No”, we’ll just send your name + attendance.
+                </div>
+              </div>
+
+              <div class="detail" id="groupWrap" style="display:none;">
+                <b>How many people are in your group?</b>
+                <input
+                  id="groupSize"
+                  name="Group Size"
+                  type="number"
+                  min="1"
+                  max="20"
+                  value="1"
+                  
+                />
+                <div class="fine" style="margin-top:10px;">
+                  Person 1 is you (uses your name). For each additional person, we’ll ask for their name.
+                </div>
+              </div>
+
+              <div class="detail" id="peopleWrap" style="display:none;">
+                <b>Food choices & dietary info</b>
+                <div id="peopleContainer" style="margin-top:10px;"></div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btn primary" type="submit">Send RSVP</button>
+              <a class="btn" href="index.html">Back to home</a>
+            </div>
+          </form>
+        </div>
+
+        <aside class="side">
+          <h2>Menu</h2>
+          <p><b>Main:</b> Atlantic Salmon <i>or</i> Lancashire Cheese &amp; Onion Pie</p>
+          <p><b>Dessert:</b> Sicilian Lemon Cheesecake (V) <i>or</i> Double Chocolate Brownie (V)</p>
+          <div class="sep"></div>
+          <p class="fine">Please add allergies or dietary requirements for each person.</p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const attendingEl = document.getElementById('attending');
+    const groupWrap = document.getElementById('groupWrap');
+    const peopleWrap = document.getElementById('peopleWrap');
+    const groupSizeEl = document.getElementById('groupSize');
+    const peopleContainer = document.getElementById('peopleContainer');
+    const primaryNameEl = document.getElementById('primaryName');
+
+    const mains = ["Atlantic Salmon", "Lancashire Cheese & Onion Pie"];
+    const desserts = ["Sicilian Lemon Cheesecake (V)", "Double Chocolate Brownie (V)"];
+
+    function inputStyle() {
+      return "width:100%; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06); color:#f5f6fa; outline:none;";
+    }
+
+    function selectStyle() {
+      return inputStyle();
+    }
+
+    function personSection(i) {
+      const wrap = document.createElement('div');
+      wrap.className = 'detail';
+      wrap.style.marginTop = '10px';
+
+      const title = document.createElement('b');
+      title.textContent = `Person ${i}`;
+      wrap.appendChild(title);
+
+      // Person name (only for people after first)
+      if (i > 1) {
+        const nameLabel = document.createElement('div');
+        nameLabel.className = 'fine';
+        nameLabel.style.marginTop = '8px';
+        nameLabel.textContent = 'Name';
+        wrap.appendChild(nameLabel);
+
+        const nameInput = document.createElement('input');
+        nameInput.type = 'text';
+        nameInput.name = `Person ${i} - Name`;
+        nameInput.required = true;
+        nameInput.style = inputStyle();
+        wrap.appendChild(nameInput);
+      } else {
+        // Hidden field to send person 1 name (same as primary)
+        const hiddenName = document.createElement('input');
+        hiddenName.type = 'hidden';
+        hiddenName.name = 'Person 1 - Name';
+        hiddenName.id = 'person1HiddenName';
+        hiddenName.value = primaryNameEl.value || '';
+        wrap.appendChild(hiddenName);
+
+        const note = document.createElement('div');
+        note.className = 'fine';
+        note.style.marginTop = '8px';
+        note.textContent = 'Name: uses the name you entered above.';
+        wrap.appendChild(note);
+      }
+
+      // Allergies / dietary requirements (all people)
+      const dietLabel = document.createElement('div');
+      dietLabel.className = 'fine';
+      dietLabel.style.marginTop = '10px';
+      dietLabel.textContent = 'Allergies / dietary requirements';
+      wrap.appendChild(dietLabel);
+
+      const dietInput = document.createElement('input');
+      dietInput.type = 'text';
+      dietInput.name = `Person ${i} - Allergies/Dietary`;
+      dietInput.placeholder = 'e.g. nut allergy, gluten-free, vegetarian… (leave blank if none)';
+      dietInput.style = inputStyle();
+      wrap.appendChild(dietInput);
+
+      // Main
+      const mainLabel = document.createElement('div');
+      mainLabel.className = 'fine';
+      mainLabel.style.marginTop = '10px';
+      mainLabel.textContent = 'Main';
+      wrap.appendChild(mainLabel);
+
+      const mainSelect = document.createElement('select');
+      mainSelect.name = `Person ${i} - Main`;
+      mainSelect.required = true;
+      mainSelect.style = selectStyle();
+
+      const main0 = document.createElement('option');
+      main0.value = '';
+      main0.disabled = true;
+      main0.selected = true;
+      main0.textContent = 'Choose a main…';
+      mainSelect.appendChild(main0);
+
+      mains.forEach(m => {
+        const o = document.createElement('option');
+        o.value = m;
+        o.textContent = m;
+        mainSelect.appendChild(o);
+      });
+      wrap.appendChild(mainSelect);
+
+      // Dessert
+      const desLabel = document.createElement('div');
+      desLabel.className = 'fine';
+      desLabel.style.marginTop = '10px';
+      desLabel.textContent = 'Dessert';
+      wrap.appendChild(desLabel);
+
+      const desSelect = document.createElement('select');
+      desSelect.name = `Person ${i} - Dessert`;
+      desSelect.required = true;
+      desSelect.style = selectStyle();
+
+      const des0 = document.createElement('option');
+      des0.value = '';
+      des0.disabled = true;
+      des0.selected = true;
+      des0.textContent = 'Choose a dessert…';
+      desSelect.appendChild(des0);
+
+      desserts.forEach(d => {
+        const o = document.createElement('option');
+        o.value = d;
+        o.textContent = d;
+        desSelect.appendChild(o);
+      });
+      wrap.appendChild(desSelect);
+
+      return wrap;
+    }
+
+    function renderPeople() {
+      const n = Math.max(1, Math.min(20, Number(groupSizeEl.value) || 1));
+      peopleContainer.innerHTML = '';
+
+      for (let i = 1; i <= n; i++) {
+        peopleContainer.appendChild(personSection(i));
+      }
+
+      // keep person 1 hidden name synced
+      const h = document.getElementById('person1HiddenName');
+      if (h) h.value = primaryNameEl.value || '';
+    }
+
+    attendingEl.addEventListener('change', () => {
+      const yes = attendingEl.value === 'Yes';
+      groupWrap.style.display = yes ? '' : 'none';
+      peopleWrap.style.display = yes ? '' : 'none';
+
+      if (yes) {
+        if (!groupSizeEl.value) groupSizeEl.value = 1;
+        renderPeople();
+      } else {
+        peopleContainer.innerHTML = '';
+      }
+    });
+
+    groupSizeEl.addEventListener('input', () => {
+      if (attendingEl.value === 'Yes') renderPeople();
+    });
+
+    primaryNameEl.addEventListener('input', () => {
+      const h = document.getElementById('person1HiddenName');
+      if (h) h.value = primaryNameEl.value || '';
+    });
+  </script>
+</body>
+</html>
