@@ -107,7 +107,7 @@
 							<div class="flipTimebox">
 								<div class="clock clock-fix"></div>
 							  </div>
-							<p><a href="#rsvp" class="btn btn-default btn-sm">Répondez S'il Vous Plaît</a></p>
+							<p><a href="#rsvp" class="btn btn-default btn-sm">RSVP</a></p>
 						</div>
 					</div>
 				</div>
@@ -115,24 +115,6 @@
 		</div>
 	</header>
 
-	<div id="fh5co-travel" class="fh5co-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
-					<h2>Order of service</h2>
-					<p>We will update this with further details, but for now...</p>
-
-					<ul style="list-style-type:none;">
-						<li><b>1pm</b> Arrivals </li>						
-						<li><b>2pm</b> Cermony </li>
-					</ul>
-					<br><br>
-
-					
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
@@ -253,7 +235,7 @@
 	   			<div class="container">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 text-center fh5co-heading animate-box">
-					<h2>Répondez S'il Vous Plaît</h2>
+					<h2>RSVP</h2>
 				</div>
 			</div>
 			<div class="row row-bottom-padded-md">
@@ -408,11 +390,11 @@
       const noFoodLabel = el("label", { style: "display:block; margin-bottom:8px;" });
       const noFood = el("input", {
         type: "checkbox",
-        name: "Guest " + i + " No Food",
+        name: "Guest " + i + " Child No Food",
         value: "Yes"
       });
       noFoodLabel.appendChild(noFood);
-      noFoodLabel.appendChild(document.createTextNode(" No food"));
+      noFoodLabel.appendChild(document.createTextNode(" Child No food"));
       optWrap.appendChild(noFoodLabel);
 
       const childLabel = el("label", { style: "display:block;" });
