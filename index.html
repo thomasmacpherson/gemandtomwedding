@@ -93,7 +93,7 @@
 		</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/bg.jpg);" data-stellar-background-ratio="0.5">
+	<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/bg.jpg);contain:;" >
 		<div class="overlay"></div>
 		<div class="container">
 			<div class="row">
@@ -308,75 +308,206 @@
 </div>
   
 
-  <script>
-    const attending = document.getElementById('attending');
-    const groupWrap = document.getElementById('groupWrap');
-    const peopleWrap = document.getElementById('peopleWrap');
-    const groupSize = document.getElementById('groupSize');
-    const peopleContainer = document.getElementById('peopleContainer');
-    const primaryName = document.getElementById('primaryName');
+<script>
+  const attending = document.getElementById('attending');
+  const groupWrap = document.getElementById('groupWrap');
+  const peopleWrap = document.getElementById('peopleWrap');
+  const groupSize = document.getElementById('groupSize');
+  const peopleContainer = document.getElementById('peopleContainer');
+  const primaryName = document.getElementById('primaryName');
 
-    const mains = ["Atlantic Salmon", "Lancashire Cheese & Onion Pie"];
-    const desserts = ["Sicilian Lemon Cheesecake (V)", "Double Chocolate Brownie (V)"];
+  const mains = ["Atlantic Salmon", "Lancashire Cheese & Onion Pie"];
+  const desserts = ["Sicilian Lemon Cheesecake (V)", "Double Chocolate Brownie (V)"];
 
-    function createPerson(i) {
-      const div = document.createElement('div');
-      div.style.marginTop = "12px";
-
-      div.innerHTML += "<hr>";
-
-      if (i > 1) {
-        div.innerHTML += "<h3>Guest " + i + "</h3>"
-        div.innerHTML += "<span>Name</span>";
-        div.innerHTML += "<input type='text' name='Guest " + i + " Name' required style='width:100%; padding:8px;' /><br><br>";
-      } else {
-        div.innerHTML += "<input type='hidden' name='Person 1 Name' value='" + primaryName.value + "' />";
-        div.innerHTML += "<h3>Guest 1 (You)</h3>";
-      }
-
-      div.innerHTML += "<span>Allergies / Dietary Requirements</span>";
-      div.innerHTML += "<input type='text' name='Guest " + i + " Dietary' style='width:100%; padding:8px;' /><br><br>";
-
-      div.innerHTML += "<span>Main</span>";
-      div.innerHTML += "<select name='Guest " + i + " Main' required style='width:100%; padding:8px;'>" +
-                       "<option value='' disabled selected>Choose…</option>" +
-                       "<option>Atlantic Salmon</option>" +
-                       "<option>Lancashire Cheese & Onion Pie</option>" +
-                       "</select><br><br>";
-
-      div.innerHTML += "<span>Dessert</span>";
-      div.innerHTML += "<select name='Guest " + i + " Dessert' required style='width:100%; padding:8px;'>" +
-                       "<option value='' disabled selected>Choose…</option>" +
-                       "<option>Sicilian Lemon Cheesecake (V)</option>" +
-                       "<option>Double Chocolate Brownie (V)</option>" +
-                       "</select><br>";
-
-      return div;
+  function el(tag, attrs) {
+    const e = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(k => {
+        if (k === "text") e.textContent = attrs[k];
+        else if (k === "html") e.innerHTML = attrs[k];
+        else if (k === "style") e.style.cssText = attrs[k];
+        else e.setAttribute(k, attrs[k]);
+      });
     }
+    return e;
+  }
 
-    function renderPeople() {
-      peopleContainer.innerHTML = "";
-      const count = parseInt(groupSize.value) || 1;
-      for (let i = 1; i <= count; i++) {
-        peopleContainer.appendChild(createPerson(i));
-      }
-    }
+  function addLineBreaks(parent, n) {
+    for (let i = 0; i < n; i++) parent.appendChild(document.createElement("br"));
+  }
 
-    attending.addEventListener("change", function() {
-      if (this.value === "Yes") {
-        groupWrap.style.display = "block";
-        peopleWrap.style.display = "block";
-        renderPeople();
-      } else {
-        groupWrap.style.display = "none";
-        peopleWrap.style.display = "none";
-        peopleContainer.innerHTML = "";
-      }
+  function buildSelect(name, options, required) {
+    const select = el("select", { name: name, style: "width:100%; padding:8px;" });
+    if (required) select.required = true;
+
+    const placeholder = el("option", { value: "", text: "Choose…" });
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
+
+    options.forEach(opt => {
+      select.appendChild(el("option", { text: opt }));
     });
 
-    groupSize.addEventListener("input", renderPeople);
-    primaryName.addEventListener("input", renderPeople);
-  </script>
+    return select;
+  }
+
+  function createPerson(i) {
+    const wrap = el("div", { style: "margin-top:12px;" });
+    wrap.appendChild(el("hr"));
+
+    // Title + name handling
+    if (i > 1) {
+      wrap.appendChild(el("h3", { text: "Guest " + i }));
+
+      wrap.appendChild(el("span", { text: "Name" }));
+      const nameInput = el("input", {
+        type: "text",
+        name: "Guest " + i + " Name",
+        required: "true",
+        style: "width:100%; padding:8px;"
+      });
+      wrap.appendChild(nameInput);
+      addLineBreaks(wrap, 2);
+    } else {
+      // store person 1 name as hidden, and keep menus visible/required
+      wrap.appendChild(el("h3", { text: "Guest 1 (You)" }));
+      const hidden = el("input", { type: "hidden", name: "Person 1 Name" });
+      hidden.value = primaryName.value || "";
+      wrap.appendChild(hidden);
+    }
+
+    // Dietary
+    wrap.appendChild(el("span", { text: "Allergies / Dietary Requirements" }));
+    wrap.appendChild(el("input", {
+      type: "text",
+      name: "Guest " + i + " Dietary",
+      style: "width:100%; padding:8px;"
+    }));
+    addLineBreaks(wrap, 2);
+
+    // Menu container (so we can hide it)
+    const menuWrap = el("div");
+
+    // Main
+    menuWrap.appendChild(el("span", { text: "Main" }));
+    const mainSelect = buildSelect("Guest " + i + " Main", mains, true);
+    menuWrap.appendChild(mainSelect);
+    addLineBreaks(menuWrap, 2);
+
+    // Dessert
+    menuWrap.appendChild(el("span", { text: "Dessert" }));
+    const dessertSelect = buildSelect("Guest " + i + " Dessert", desserts, true);
+    menuWrap.appendChild(dessertSelect);
+    addLineBreaks(menuWrap, 1);
+
+    // Options for Guest 2+ only
+    if (i > 1) {
+      const optWrap = el("div", { style: "margin-bottom:12px;" });
+
+      const noFoodLabel = el("label", { style: "display:block; margin-bottom:8px;" });
+      const noFood = el("input", {
+        type: "checkbox",
+        name: "Guest " + i + " No Food",
+        value: "Yes"
+      });
+      noFoodLabel.appendChild(noFood);
+      noFoodLabel.appendChild(document.createTextNode(" No food"));
+      optWrap.appendChild(noFoodLabel);
+
+      const childLabel = el("label", { style: "display:block;" });
+      const childMenu = el("input", {
+        type: "checkbox",
+        name: "Guest " + i + " Requires Child Menu",
+        value: "Yes"
+      });
+      childLabel.appendChild(childMenu);
+      childLabel.appendChild(document.createTextNode(" Requires child menu"));
+      optWrap.appendChild(childLabel);
+
+      const childNoteWrap = el("div", { style: "margin-top:8px; display:none;" });
+      childNoteWrap.appendChild(el("em", { text: "Child menu is: Farmhouse Bread & Salted Butter - Vegan Sausage, Creamed Potato and garden peas (VE) - Ice Cream" }));
+
+      const childHidden = el("input", {
+        type: "hidden",
+        name: "Guest " + i + " Child Menu Details"
+      });
+      childHidden.value = "Child menu";
+      childNoteWrap.appendChild(childHidden);
+
+      optWrap.appendChild(childNoteWrap);
+
+      // put options above menu
+      wrap.appendChild(optWrap);
+
+      function applyRules() {
+        const noFoodChecked = noFood.checked;
+        const childChecked = childMenu.checked;
+
+        if (noFoodChecked || childChecked) {
+          menuWrap.style.display = "none";
+          mainSelect.required = false;
+          dessertSelect.required = false;
+          mainSelect.value = "";
+          dessertSelect.value = "";
+        } else {
+          menuWrap.style.display = "block";
+          mainSelect.required = true;
+          dessertSelect.required = true;
+        }
+
+        childNoteWrap.style.display = childChecked ? "block" : "none";
+      }
+
+      // make them mutually exclusive
+      noFood.addEventListener("change", function () {
+        if (noFood.checked) childMenu.checked = false;
+        applyRules();
+      });
+
+      childMenu.addEventListener("change", function () {
+        if (childMenu.checked) noFood.checked = false;
+        applyRules();
+      });
+
+      applyRules();
+    }
+
+    // Append menu (always, but may be hidden for guests 2+)
+    wrap.appendChild(menuWrap);
+
+    return wrap;
+  }
+
+  function renderPeople() {
+    peopleContainer.innerHTML = "";
+    const count = parseInt(groupSize.value, 10) || 1;
+    for (let i = 1; i <= count; i++) {
+      peopleContainer.appendChild(createPerson(i));
+    }
+  }
+
+  attending.addEventListener("change", function () {
+    if (this.value === "Yes") {
+      groupWrap.style.display = "block";
+      peopleWrap.style.display = "block";
+      renderPeople();
+    } else {
+      groupWrap.style.display = "none";
+      peopleWrap.style.display = "none";
+      peopleContainer.innerHTML = "";
+    }
+  });
+
+  groupSize.addEventListener("input", renderPeople);
+
+  // IMPORTANT: update only hidden Person 1 Name (don’t rebuild the whole form on every keystroke)
+  primaryName.addEventListener("input", function () {
+    const hidden = peopleContainer.querySelector("input[name='Person 1 Name']");
+    if (hidden) hidden.value = primaryName.value || "";
+  });
+</script>
+
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
