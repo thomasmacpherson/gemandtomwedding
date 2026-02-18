@@ -414,6 +414,9 @@
 .icon-ellipsis:before {
   content: "\e129";
 }
+.icon-beddouble:before {
+  content: "\ea81";
+}
 .icon-add-to-list:before {
   content: "\e900";
 }
