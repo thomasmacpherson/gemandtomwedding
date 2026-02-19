@@ -497,6 +497,9 @@
     "Vegetarian Full English"
   ];
 
+  const childDinnerNoteText =
+    "Children's dinner menu: Farmhouse Bread & Salted Butter - Vegan Sausage, Creamed Potato and garden peas - Ice Cream";
+
   function el(tag, attrs) {
     const e = document.createElement(tag);
     if (attrs) {
@@ -581,6 +584,12 @@
     let noFood;
     let childMenu;
 
+    // NOTE: this note now lives OUTSIDE breakfastWrap, so it can show even when breakfast isn't ticked
+    const childMenuNote = el("div", {
+      text: childDinnerNoteText,
+      style: "font-size:14px; margin:8px 0 0 0; display:none;"
+    });
+
     if (i > 1) {
 
       const optWrap = el("div", { style: "margin-bottom:12px;" });
@@ -607,6 +616,9 @@
       childLabel.appendChild(document.createTextNode(" Requires child menu"));
       optWrap.appendChild(childLabel);
 
+      // Put the note directly under the child menu checkbox area
+      optWrap.appendChild(childMenuNote);
+
       wrap.appendChild(optWrap);
 
       function applyFoodRules() {
@@ -623,35 +635,35 @@
         }
       }
 
+      function applyChildMenuNote() {
+        childMenuNote.style.display = (childMenu && childMenu.checked) ? "block" : "none";
+      }
+
       noFood.addEventListener("change", function () {
         if (noFood.checked) childMenu.checked = false;
         applyFoodRules();
+        applyChildMenuNote();
         applyBreakfastRules();
       });
 
       childMenu.addEventListener("change", function () {
         if (childMenu.checked) noFood.checked = false;
         applyFoodRules();
+        applyChildMenuNote();
         applyBreakfastRules();
       });
 
       applyFoodRules();
+      applyChildMenuNote();
     }
 
-    // Add Starter/Main block first
+    // Add Starter/Main block
     wrap.appendChild(menuWrap);
 
     addLineBreaks(wrap, 1);
 
     // Breakfast (AFTER Starter/Main)
     const breakfastWrap = el("div", { style: "display:none;" });
-
-    const childMenuNote = el("div", {
-      text: "Children's dinner menu: Farmhouse Bread & Salted Butter - Vegan Sausage, Creamed Potato and garden peas - Ice Cream",
-      style: "font-size:14px; margin-bottom:6px; display:none;"
-    });
-
-    breakfastWrap.appendChild(childMenuNote);
 
     breakfastWrap.appendChild(el("span", { text: "Breakfast" }));
     const breakfastSelect = buildSelect("Guest " + i + " Breakfast", breakfasts, false);
@@ -664,28 +676,18 @@
       const showBreakfast =
         attending.value === "Yes" &&
         breakfastCheck.checked &&
-        !(noFood && noFood.checked);
+        !(noFood && noFood.checked); // only remove breakfast if "Child No Food" is ticked
 
       breakfastWrap.style.display = showBreakfast ? "block" : "none";
       breakfastSelect.required = showBreakfast;
 
-      if (!showBreakfast) breakfastSelect.value = "";
-
-      if (childMenu && childMenu.checked) {
-        childMenuNote.style.display = "block";
-      } else {
-        childMenuNote.style.display = "none";
+      if (!showBreakfast) {
+        breakfastSelect.value = "";
       }
     }
 
     if (noFood) {
-      noFood.addEventListener("change", function () {
-        applyBreakfastRules();
-      });
-
-      childMenu.addEventListener("change", function () {
-        applyBreakfastRules();
-      });
+      noFood.addEventListener("change", applyBreakfastRules);
     }
 
     breakfastCheck.addEventListener("change", applyBreakfastRules);
