@@ -373,282 +373,330 @@
         Please let us know if you’re attending by 22th February.
       </h3>
 	<p>Please use names you would want on wedding stationery.</p> 
+
+
 <form action="https://formsubmit.co/28260015a5f223ac6f883006cae9d286" method="POST" id="rsvpForm">
 
-<input type="hidden" name="_subject" value="New RSVP submission" />
-<input type="hidden" name="_template" value="table" />
-<input type="hidden" name="_captcha" value="false" />
-<input type="hidden" name="_next" value="https://www.gemandtom.wedding/thanks.html" />
+  <input type="hidden" name="_subject" value="New RSVP submission" />
+  <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_next" value="https://www.gemandtom.wedding/thanks.html" />
 
-<div>
+  <div>
 
-<div>
-<span>Your name</span>
-<input type="text" name="Primary Name" id="primaryName" required style="width:100%; padding:8px;" />
-</div>
+    <div>
+      <span>Your name</span>
+      <input type="text" name="Primary Name" id="primaryName" required style="width:100%; padding:8px;" />
+    </div>
 
-<br>
+    <br>
 
-<div class="event-wrap">
-<span>Are you able to attend?</span>
-<select name="Attending" id="attending" required style="width:100%; padding:8px;">
-<option value="" disabled selected>Please choose…</option>
-<option value="Yes">Yes</option>
-<option value="No">No</option>
-</select>
-</div>
+    <div class="event-wrap">
+      <span>Are you able to attend?</span>
+      <select name="Attending" id="attending" required style="width:100%; padding:8px;">
+        <option value="" disabled selected>Please choose…</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
 
-<br>
+    <br>
 
-<div class="event-wrap" id="groupWrap" style="display:none;">
-<span>How many people are in your group?</span>
-<input type="number" name="Group Size" id="groupSize" min="1" max="10" value="1" style="width:100%; padding:8px;" />
-</div>
+    <div class="event-wrap" id="groupWrap" style="display:none;">
+      <span>How many people are in your group?</span>
+      <input type="number" name="Group Size" id="groupSize" min="1" max="10" value="1" style="width:100%; padding:8px;" />
+    </div>
 
-<br>
+    <br>
 
-<!-- EXTRA SECTION (only when attending Yes) -->
-<div id="extraWrap" style="display:none;">
+    <div id="extraWrap" style="display:none;">
 
-<div>
-<span>Please let us know if you have any questions or requirements.</span>
-<input type="text" name="Questions" id="questions" style="width:100%; padding:8px;" />
-</div>
+      <div>
+        <span>Please let us know if you have any questions or requirements.</span>
+        <input type="text" name="Questions" id="questions" style="width:100%; padding:8px;" />
+      </div>
 
-<br>
+      <br>
 
-<div>
-<label style="display:block;">
-<input type="checkbox" name="Accommodation Required" id="accommodationCheck" />
-Is your party staying for 1 night and would like onsite accommodation?
-</label>
-</div>
+      <div>
+        <label style="display:block;">
+          <input type="checkbox" name="Accommodation Required" id="accommodationCheck" />
+          Is your party staying for 1 night and would like onsite accommodation?
+        </label>
+      </div>
 
-<br>
+      <br>
 
-<div id="accommodationOptions" style="display:none;">
-<span>Please let us know which accommodation options you would be open to:</span>
-<br><br>
+      <div id="accommodationOptions" style="display:none;">
+        <span>Please let us know which accommodation options you would be open to:</span>
+        <br><br>
 
-<label><input type="checkbox" name="Accommodation Option - The Coach House" value="Yes"> The Coach House</label><br>
-<label><input type="checkbox" name="Accommodation Option - Keeper’s Cottage" value="Yes"> Keeper’s Cottage</label><br>
-<label><input type="checkbox" name="Accommodation Option - The Nook" value="Yes"> The Nook</label><br>
-<label><input type="checkbox" name="Accommodation Option - Yurts" value="Yes"> Yurts</label><br>
-<label><input type="checkbox" name="Accommodation Option - Wooden Pods" value="Yes"> Wooden Pods</label>
-</div>
+        <label><input type="checkbox" name="Accommodation Option - The Coach House" value="Yes"> The Coach House</label><br>
+        <label><input type="checkbox" name="Accommodation Option - Keeper’s Cottage" value="Yes"> Keeper’s Cottage</label><br>
+        <label><input type="checkbox" name="Accommodation Option - The Nook" value="Yes"> The Nook</label><br>
+        <label><input type="checkbox" name="Accommodation Option - Yurts" value="Yes"> Yurts</label><br>
+        <label><input type="checkbox" name="Accommodation Option - Wooden Pods" value="Yes"> Wooden Pods</label>
+      </div>
 
-</div>
+      <br>
 
-<br>
+      <div>
+        <label style="display:block;">
+          <input type="checkbox" name="Breakfast Attending" id="breakfastCheck" value="Yes" />
+          Will your group be joining us at the venue for 10am breakfast on the 2nd?
+        </label>
+      </div>
 
-<div class="event-wrap" id="peopleWrap" style="display:none;">
-<span>Food choices & dietary requirements</span>
-<div id="peopleContainer"></div>
-</div>
+    </div>
 
-</div>
+    <br>
 
-<div class="actions">
-<br>
-<button class="btn" type="submit">Send RSVP</button>
-<br><br>
-</div>
+    <div class="event-wrap" id="peopleWrap" style="display:none;">
+      <span>Food choices & dietary requirements</span>
+      <div id="peopleContainer"></div>
+    </div>
+
+  </div>
+
+  <div class="actions">
+    <br>
+    <button class="btn" type="submit">Send RSVP</button>
+    <br><br>
+  </div>
 
 </form>
 
 <script>
 
-const attending = document.getElementById('attending');
-const groupWrap = document.getElementById('groupWrap');
-const peopleWrap = document.getElementById('peopleWrap');
-const groupSize = document.getElementById('groupSize');
-const peopleContainer = document.getElementById('peopleContainer');
-const primaryName = document.getElementById('primaryName');
-const extraWrap = document.getElementById('extraWrap');
-const accommodationCheck = document.getElementById('accommodationCheck');
-const accommodationOptions = document.getElementById('accommodationOptions');
+  const attending = document.getElementById('attending');
+  const groupWrap = document.getElementById('groupWrap');
+  const peopleWrap = document.getElementById('peopleWrap');
+  const groupSize = document.getElementById('groupSize');
+  const peopleContainer = document.getElementById('peopleContainer');
+  const primaryName = document.getElementById('primaryName');
+  const extraWrap = document.getElementById('extraWrap');
+  const accommodationCheck = document.getElementById('accommodationCheck');
+  const accommodationOptions = document.getElementById('accommodationOptions');
+  const breakfastCheck = document.getElementById('breakfastCheck');
 
-const starters = [
-"Vegetarian Antipasti Sharing Board",
-"Goats Cheese Tart",
-"Vegetable Soup"
-];
+  const starters = [
+    "Vegetarian Antipasti Sharing Board",
+    "Goats Cheese Tart",
+    "Vegetable Soup"
+  ];
 
-const mains = [
-"Atlantic Salmon",
-"Lancashire Cheese & Onion Pie"
-];
+  const mains = [
+    "Atlantic Salmon",
+    "Lancashire Cheese & Onion Pie"
+  ];
 
-function el(tag, attrs) {
-const e = document.createElement(tag);
-if (attrs) {
-Object.keys(attrs).forEach(k => {
-if (k === "text") e.textContent = attrs[k];
-else if (k === "style") e.style.cssText = attrs[k];
-else e.setAttribute(k, attrs[k]);
-});
-}
-return e;
-}
+  const breakfasts = [
+    "Full English",
+    "Vegetarian Full English"
+  ];
 
-function addLineBreaks(parent, n) {
-for (let i = 0; i < n; i++) parent.appendChild(document.createElement("br"));
-}
+  function el(tag, attrs) {
+    const e = document.createElement(tag);
+    if (attrs) {
+      Object.keys(attrs).forEach(k => {
+        if (k === "text") e.textContent = attrs[k];
+        else if (k === "style") e.style.cssText = attrs[k];
+        else e.setAttribute(k, attrs[k]);
+      });
+    }
+    return e;
+  }
 
-function buildSelect(name, options, required) {
-const select = el("select", { name: name, style: "width:100%; padding:8px;" });
-if (required) select.required = true;
+  function addLineBreaks(parent, n) {
+    for (let i = 0; i < n; i++) parent.appendChild(document.createElement("br"));
+  }
 
-const placeholder = el("option", { value: "", text: "Choose…" });
-placeholder.disabled = true;
-placeholder.selected = true;
-select.appendChild(placeholder);
+  function buildSelect(name, options, required) {
+    const select = el("select", { name: name, style: "width:100%; padding:8px;" });
+    if (required) select.required = true;
 
-options.forEach(opt => {
-select.appendChild(el("option", { text: opt }));
-});
+    const placeholder = el("option", { value: "", text: "Choose…" });
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.appendChild(placeholder);
 
-return select;
-}
+    options.forEach(opt => {
+      select.appendChild(el("option", { text: opt }));
+    });
 
-function createPerson(i) {
+    return select;
+  }
 
-const wrap = el("div", { style: "margin-top:12px;" });
-wrap.appendChild(el("hr"));
+  function createPerson(i) {
 
-if (i > 1) {
-wrap.appendChild(el("h3", { text: "Guest " + i }));
-wrap.appendChild(el("span", { text: "Name" }));
-const nameInput = el("input", {
-type: "text",
-name: "Guest " + i + " Name",
-required: "true",
-style: "width:100%; padding:8px;"
-});
-wrap.appendChild(nameInput);
-addLineBreaks(wrap, 2);
-} else {
-wrap.appendChild(el("h3", { text: "Guest 1 (You)" }));
-const hidden = el("input", { type: "hidden", name: "Person 1 Name" });
-hidden.value = primaryName.value || "";
-wrap.appendChild(hidden);
-}
+    const wrap = el("div", { style: "margin-top:12px;" });
+    wrap.appendChild(el("hr"));
 
-wrap.appendChild(el("span", { text: "Allergies / Dietary Requirements" }));
-wrap.appendChild(el("input", {
-type: "text",
-name: "Guest " + i + " Dietary",
-style: "width:100%; padding:8px;"
-}));
-addLineBreaks(wrap, 2);
+    if (i > 1) {
+      wrap.appendChild(el("h3", { text: "Guest " + i }));
+      wrap.appendChild(el("span", { text: "Name" }));
 
-const menuWrap = el("div");
+      const nameInput = el("input", {
+        type: "text",
+        name: "Guest " + i + " Name",
+        required: "true",
+        style: "width:100%; padding:8px;"
+      });
 
-// Starter
-menuWrap.appendChild(el("span", { text: "Starter" }));
-const starterSelect = buildSelect("Guest " + i + " Starter", starters, true);
-menuWrap.appendChild(starterSelect);
-addLineBreaks(menuWrap, 2);
+      wrap.appendChild(nameInput);
+      addLineBreaks(wrap, 2);
+    } else {
+      wrap.appendChild(el("h3", { text: "Guest 1 (You)" }));
+      const hidden = el("input", { type: "hidden", name: "Person 1 Name" });
+      hidden.value = primaryName.value || "";
+      wrap.appendChild(hidden);
+    }
 
-// Main
-menuWrap.appendChild(el("span", { text: "Main" }));
-const mainSelect = buildSelect("Guest " + i + " Main", mains, true);
-menuWrap.appendChild(mainSelect);
-addLineBreaks(menuWrap, 1);
+    wrap.appendChild(el("span", { text: "Allergies / Dietary Requirements" }));
+    wrap.appendChild(el("input", {
+      type: "text",
+      name: "Guest " + i + " Dietary",
+      style: "width:100%; padding:8px;"
+    }));
 
-if (i > 1) {
+    addLineBreaks(wrap, 2);
 
-const optWrap = el("div", { style: "margin-bottom:12px;" });
+    const menuWrap = el("div");
 
-const noFoodLabel = el("label", { style: "display:block; margin-bottom:8px;" });
-const noFood = el("input", {
-type: "checkbox",
-name: "Guest " + i + " Child No Food",
-value: "Yes"
-});
-noFoodLabel.appendChild(noFood);
-noFoodLabel.appendChild(document.createTextNode(" Child No food"));
-optWrap.appendChild(noFoodLabel);
+    menuWrap.appendChild(el("span", { text: "Starter" }));
+    const starterSelect = buildSelect("Guest " + i + " Starter", starters, true);
+    menuWrap.appendChild(starterSelect);
+    addLineBreaks(menuWrap, 2);
 
-const childLabel = el("label", { style: "display:block;" });
-const childMenu = el("input", {
-type: "checkbox",
-name: "Guest " + i + " Requires Child Menu",
-value: "Yes"
-});
-childLabel.appendChild(childMenu);
-childLabel.appendChild(document.createTextNode(" Requires child menu"));
-optWrap.appendChild(childLabel);
+    menuWrap.appendChild(el("span", { text: "Main" }));
+    const mainSelect = buildSelect("Guest " + i + " Main", mains, true);
+    menuWrap.appendChild(mainSelect);
 
-wrap.appendChild(optWrap);
+    wrap.appendChild(menuWrap);
 
-function applyRules() {
-if (noFood.checked || childMenu.checked) {
-menuWrap.style.display = "none";
-starterSelect.required = false;
-mainSelect.required = false;
-starterSelect.value = "";
-mainSelect.value = "";
-} else {
-menuWrap.style.display = "block";
-starterSelect.required = true;
-mainSelect.required = true;
-}
-}
+    addLineBreaks(wrap, 1);
 
-noFood.addEventListener("change", function () {
-if (noFood.checked) childMenu.checked = false;
-applyRules();
-});
+    let noFood;
+    let childMenu;
 
-childMenu.addEventListener("change", function () {
-if (childMenu.checked) noFood.checked = false;
-applyRules();
-});
+    if (i > 1) {
 
-applyRules();
-}
+      const optWrap = el("div", { style: "margin-bottom:12px;" });
 
-wrap.appendChild(menuWrap);
+      noFood = el("input", {
+        type: "checkbox",
+        name: "Guest " + i + " Child No Food",
+        value: "Yes"
+      });
 
-return wrap;
-}
+      const noFoodLabel = el("label", { style: "display:block; margin-bottom:8px;" });
+      noFoodLabel.appendChild(noFood);
+      noFoodLabel.appendChild(document.createTextNode(" Child No food"));
+      optWrap.appendChild(noFoodLabel);
 
-function renderPeople() {
-peopleContainer.innerHTML = "";
-const count = parseInt(groupSize.value, 10) || 1;
-for (let i = 1; i <= count; i++) {
-peopleContainer.appendChild(createPerson(i));
-}
-}
+      childMenu = el("input", {
+        type: "checkbox",
+        name: "Guest " + i + " Requires Child Menu",
+        value: "Yes"
+      });
 
-attending.addEventListener("change", function () {
-if (this.value === "Yes") {
-groupWrap.style.display = "block";
-peopleWrap.style.display = "block";
-extraWrap.style.display = "block";
-renderPeople();
-} else {
-groupWrap.style.display = "none";
-peopleWrap.style.display = "none";
-extraWrap.style.display = "none";
-accommodationOptions.style.display = "none";
-peopleContainer.innerHTML = "";
-}
-});
+      const childLabel = el("label", { style: "display:block;" });
+      childLabel.appendChild(childMenu);
+      childLabel.appendChild(document.createTextNode(" Requires child menu"));
+      optWrap.appendChild(childLabel);
 
-groupSize.addEventListener("input", renderPeople);
+      wrap.appendChild(optWrap);
+    }
 
-primaryName.addEventListener("input", function () {
-const hidden = peopleContainer.querySelector("input[name='Person 1 Name']");
-if (hidden) hidden.value = primaryName.value || "";
-});
+    const breakfastWrap = el("div", { style: "display:none;" });
 
-accommodationCheck.addEventListener("change", function() {
-accommodationOptions.style.display = this.checked ? "block" : "none";
-});
+    const childMenuNote = el("div", {
+      text: "Children's dinner menu: Farmhouse Bread & Salted Butter - Vegan Sausage, Creamed Potato and garden peas - Ice Cream",
+      style: "font-size:14px; margin-bottom:6px; display:none;"
+    });
+
+    breakfastWrap.appendChild(childMenuNote);
+
+    breakfastWrap.appendChild(el("span", { text: "Breakfast" }));
+    const breakfastSelect = buildSelect("Guest " + i + " Breakfast", breakfasts, false);
+    breakfastWrap.appendChild(breakfastSelect);
+
+    wrap.appendChild(breakfastWrap);
+
+    function applyBreakfastRules() {
+
+      const showBreakfast =
+        attending.value === "Yes" &&
+        breakfastCheck.checked &&
+        !(noFood && noFood.checked);
+
+      breakfastWrap.style.display = showBreakfast ? "block" : "none";
+      breakfastSelect.required = showBreakfast;
+
+      if (!showBreakfast) breakfastSelect.value = "";
+
+      if (childMenu && childMenu.checked) {
+        childMenuNote.style.display = "block";
+      } else {
+        childMenuNote.style.display = "none";
+      }
+    }
+
+    if (noFood) {
+      noFood.addEventListener("change", applyBreakfastRules);
+      childMenu.addEventListener("change", applyBreakfastRules);
+    }
+
+    breakfastCheck.addEventListener("change", applyBreakfastRules);
+
+    applyBreakfastRules();
+
+    return wrap;
+  }
+
+  function renderPeople() {
+    peopleContainer.innerHTML = "";
+    const count = parseInt(groupSize.value, 10) || 1;
+    for (let i = 1; i <= count; i++) {
+      peopleContainer.appendChild(createPerson(i));
+    }
+  }
+
+  attending.addEventListener("change", function () {
+    if (this.value === "Yes") {
+      groupWrap.style.display = "block";
+      peopleWrap.style.display = "block";
+      extraWrap.style.display = "block";
+      renderPeople();
+    } else {
+      groupWrap.style.display = "none";
+      peopleWrap.style.display = "none";
+      extraWrap.style.display = "none";
+      accommodationOptions.style.display = "none";
+      peopleContainer.innerHTML = "";
+      breakfastCheck.checked = false;
+    }
+  });
+
+  groupSize.addEventListener("input", renderPeople);
+
+  primaryName.addEventListener("input", function () {
+    const hidden = peopleContainer.querySelector("input[name='Person 1 Name']");
+    if (hidden) hidden.value = primaryName.value || "";
+  });
+
+  accommodationCheck.addEventListener("change", function() {
+    accommodationOptions.style.display = this.checked ? "block" : "none";
+  });
+
+  breakfastCheck.addEventListener("change", function () {
+    if (attending.value === "Yes") renderPeople();
+  });
 
 </script>
+
+
+
 
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
