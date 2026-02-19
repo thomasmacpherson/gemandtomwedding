@@ -684,6 +684,14 @@ h1, h2, h3, h4, h5, h6, figure {
     margin-left: 0;
   }
 }
+
+.acomimg {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
 #fh5co-gallery-list li a {
   min-height: 400px;
   padding: 2em;
