@@ -409,6 +409,7 @@
 
     <br>
 
+    <!-- EXTRA SECTION (only when attending Yes) -->
     <div id="extraWrap" style="display:none;">
 
       <div>
@@ -440,6 +441,7 @@
 
       <br>
 
+      <!-- Breakfast checkbox AFTER accommodation -->
       <div>
         <label style="display:block;">
           <input type="checkbox" name="Breakfast Attending" id="breakfastCheck" value="Yes" />
@@ -563,19 +565,19 @@
 
     const menuWrap = el("div");
 
+    // Starter
     menuWrap.appendChild(el("span", { text: "Starter" }));
     const starterSelect = buildSelect("Guest " + i + " Starter", starters, true);
     menuWrap.appendChild(starterSelect);
     addLineBreaks(menuWrap, 2);
 
+    // Main
     menuWrap.appendChild(el("span", { text: "Main" }));
     const mainSelect = buildSelect("Guest " + i + " Main", mains, true);
     menuWrap.appendChild(mainSelect);
+    addLineBreaks(menuWrap, 1);
 
-    wrap.appendChild(menuWrap);
-
-    addLineBreaks(wrap, 1);
-
+    // Child options (guests > 1 only)
     let noFood;
     let childMenu;
 
@@ -583,31 +585,65 @@
 
       const optWrap = el("div", { style: "margin-bottom:12px;" });
 
+      const noFoodLabel = el("label", { style: "display:block; margin-bottom:8px;" });
       noFood = el("input", {
         type: "checkbox",
         name: "Guest " + i + " Child No Food",
         value: "Yes"
       });
 
-      const noFoodLabel = el("label", { style: "display:block; margin-bottom:8px;" });
       noFoodLabel.appendChild(noFood);
       noFoodLabel.appendChild(document.createTextNode(" Child No food"));
       optWrap.appendChild(noFoodLabel);
 
+      const childLabel = el("label", { style: "display:block;" });
       childMenu = el("input", {
         type: "checkbox",
         name: "Guest " + i + " Requires Child Menu",
         value: "Yes"
       });
 
-      const childLabel = el("label", { style: "display:block;" });
       childLabel.appendChild(childMenu);
       childLabel.appendChild(document.createTextNode(" Requires child menu"));
       optWrap.appendChild(childLabel);
 
       wrap.appendChild(optWrap);
+
+      function applyFoodRules() {
+        if (noFood.checked || childMenu.checked) {
+          menuWrap.style.display = "none";
+          starterSelect.required = false;
+          mainSelect.required = false;
+          starterSelect.value = "";
+          mainSelect.value = "";
+        } else {
+          menuWrap.style.display = "block";
+          starterSelect.required = true;
+          mainSelect.required = true;
+        }
+      }
+
+      noFood.addEventListener("change", function () {
+        if (noFood.checked) childMenu.checked = false;
+        applyFoodRules();
+        applyBreakfastRules();
+      });
+
+      childMenu.addEventListener("change", function () {
+        if (childMenu.checked) noFood.checked = false;
+        applyFoodRules();
+        applyBreakfastRules();
+      });
+
+      applyFoodRules();
     }
 
+    // Add Starter/Main block first
+    wrap.appendChild(menuWrap);
+
+    addLineBreaks(wrap, 1);
+
+    // Breakfast (AFTER Starter/Main)
     const breakfastWrap = el("div", { style: "display:none;" });
 
     const childMenuNote = el("div", {
@@ -643,8 +679,13 @@
     }
 
     if (noFood) {
-      noFood.addEventListener("change", applyBreakfastRules);
-      childMenu.addEventListener("change", applyBreakfastRules);
+      noFood.addEventListener("change", function () {
+        applyBreakfastRules();
+      });
+
+      childMenu.addEventListener("change", function () {
+        applyBreakfastRules();
+      });
     }
 
     breakfastCheck.addEventListener("change", applyBreakfastRules);
@@ -689,6 +730,7 @@
     accommodationOptions.style.display = this.checked ? "block" : "none";
   });
 
+  // Re-render when breakfast checkbox changes so all guests update
   breakfastCheck.addEventListener("change", function () {
     if (attending.value === "Yes") renderPeople();
   });
